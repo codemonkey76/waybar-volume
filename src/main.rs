@@ -85,9 +85,9 @@ fn main() {
     };
 
     let output = json!({
-        "text": "",
+        "text": state,
         "tooltip": tooltip,
-        "class": state
+        "class": if muted { "muted" } else { "volume" }
     });
 
     println!("{}", output);
