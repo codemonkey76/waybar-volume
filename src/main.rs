@@ -57,13 +57,25 @@ fn main() {
 
     let (volume, muted) = get_volume_info();
     let percent = (volume * 100.0).round() as u8;
+    /*
+    F057Evolume-high
+    F057Fvolume-low
+    F0580volume-medium
+    F075Evolume-minus
+    F075Fvolume-mute
+    F0581volume-off
+    F075Dvolume-plus
+    F1120volume-source
+    F0E08volume-variant-off
+    F1121volume-vibrate
+    */
 
     let state = match get_volume_info() {
-        (_, muted) if muted => "volume-mute",
-        (volume, _) if volume == 0.0 => "volume-off",
-        (volume, _) if volume <= 0.25 => "volume-low",
-        (volume, _) if volume <= 0.5 => "volume-medium",
-        (_, _) => "volume-high",
+        (_, muted) if muted => "ݟ",
+        (volume, _) if volume == 0.0 => "ց",
+        (volume, _) if volume <= 0.25 => "տ",
+        (volume, _) if volume <= 0.5 => "ր",
+        (_, _) => "վ",
     };
 
     let tooltip = if muted {
