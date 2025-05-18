@@ -69,13 +69,18 @@ fn main() {
     F0E08volume-variant-off
     F1121volume-vibrate
     */
+    let volume_high = "\u{F057E}";
+    let volume_low = "\u{F057F}";
+    let volume_medium = "\u{F0580}";
+    let volume_mute = "\u{F075F}";
+    let volume_off = "\u{F0581}";
 
     let state = match get_volume_info() {
-        (_, muted) if muted => "ݟ",
-        (volume, _) if volume == 0.0 => "ց",
-        (volume, _) if volume <= 0.25 => "տ",
-        (volume, _) if volume <= 0.5 => "ր",
-        (_, _) => "վ",
+        (_, muted) if muted => volume_mute,
+        (volume, _) if volume == 0.0 => volume_off,
+        (volume, _) if volume <= 0.25 => volume_low,
+        (volume, _) if volume <= 0.5 => volume_medium,
+        (_, _) => volume_high,
     };
 
     let tooltip = if muted {
