@@ -1,0 +1,9 @@
+[package]
+name = "waybar-volume"
+description = "Interacts with wireplumber to control the volume"
+license = "MIT"
+version = "1.0.0"
+edition = "2024"
+
+[dependencies]
+serde_json = "1.0.140"
