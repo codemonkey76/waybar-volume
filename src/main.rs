@@ -68,9 +68,15 @@ fn main() {
         "🔊"
     };
 
+    let tooltip = if muted {
+        format!("Volume: {}% [MUTED]", percent)
+    } else {
+        format!("Volume: {}%", percent)
+    };
+
     let output = json!({
-        "text": format!("{} {}%", icon, percent),
-        "tooltip": format!("Volume: {}%", percent),
+        "text": format!("{}", icon),
+        "tooltip": tooltip,
         "class": if muted { "muted" } else { "volume" }
     });
 
