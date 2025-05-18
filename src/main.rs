@@ -58,14 +58,12 @@ fn main() {
     let (volume, muted) = get_volume_info();
     let percent = (volume * 100.0).round() as u8;
 
-    let icon = if muted || percent == 0 {
-        "🔇"
-    } else if percent <= 25 {
-        "🔈"
-    } else if percent <= 50 {
-        "🔉"
-    } else {
-        "🔊"
+    let state = match get_volume_info() {
+        (_, muted) if muted => "volume-mute",
+        (volume, _) if volume == 0.0 => "volume-off",
+        (volume, _) if volume <= 0.25 => "volume-low",
+        (volume, _) if volume <= 0.5 => "volume-medium",
+        (_, _) => "volume-high",
     };
 
     let tooltip = if muted {
@@ -75,9 +73,9 @@ fn main() {
     };
 
     let output = json!({
-        "text": format!("{}", icon),
+        "text": "",
         "tooltip": tooltip,
-        "class": if muted { "muted" } else { "volume" }
+        "class": state
     });
 
     println!("{}", output);
